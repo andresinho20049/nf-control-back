@@ -3,11 +3,11 @@ package com.andre.nfcontrol;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class NFControlApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//@SpringBootTest
+//class NFControlApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

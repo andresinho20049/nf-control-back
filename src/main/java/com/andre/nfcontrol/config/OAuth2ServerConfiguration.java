@@ -65,6 +65,7 @@ public class OAuth2ServerConfiguration {
 			.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.antMatchers(HttpMethod.POST, "/user/forgot-password").permitAll()
+			.antMatchers(HttpMethod.POST, "/user").permitAll()
 			.antMatchers("/v2/api-docs", 
 					"/configuration/ui",
 					"/swagger-resources/**", 
