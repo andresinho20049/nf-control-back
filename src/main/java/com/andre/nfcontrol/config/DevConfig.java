@@ -3,6 +3,7 @@ package com.andre.nfcontrol.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,25 @@ import com.andre.nfcontrol.service.RolesService;
 import com.andre.nfcontrol.service.UserService;
 import com.andre.nfcontrol.utils.Constants;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Configuration
 @Profile({ "dev" })
 @ComponentScan({ "com.andre.nfcontrol.controller" })
 public class DevConfig {
+	
+	@Value("${vibbraneo_mail}")
+	private String vibbraneoMail;
+	
+	@Value("${vibbraneo_password}")
+	private String vibbraneoPassword;
+	
+	@Value("${dev_mail}")
+	private String devMail;
+
+	@Value("${dev_password}")
+	private String devPassword;
 
 	@Autowired
 	private UserService userService;
@@ -52,20 +68,18 @@ public class DevConfig {
 		//Users Test
 		try {
 			String name = "Vibbraneo";
-			String mail = "srvibbraneo@gmail.com";
-			String password = "NFControl@1234";
-			User user = new User(name, mail, password, Arrays.asList(roles));
+			User user = new User(name, vibbraneoMail, vibbraneoPassword, Arrays.asList(roles));
 			userService.save(user);			
 		} catch (ProjectException e) {
+			log.error(e.getMessage(), e);
 		}
 		
 		try {
-			String name = "André";
-			String mail = "andre.andresinho2009@hotmail.com";
-			String password = "NFControl@1234";
-			User user = new User(name, mail, password, Arrays.asList(roles));
+			String name = "Developer Test";
+			User user = new User(name, devMail, devPassword, Arrays.asList(roles));
 			userService.save(user);			
 		} catch (ProjectException e) {
+			log.error(e.getMessage(), e);
 		}
 		
 	}

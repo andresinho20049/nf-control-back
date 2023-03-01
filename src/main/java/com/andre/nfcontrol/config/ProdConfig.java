@@ -3,6 +3,7 @@ package com.andre.nfcontrol.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,19 @@ import com.andre.nfcontrol.service.RolesService;
 import com.andre.nfcontrol.service.UserService;
 import com.andre.nfcontrol.utils.Constants;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Configuration
 @Profile({ "prod" })
-@ComponentScan({ "com.andre.boilerplate.controller" })
+@ComponentScan({ "com.andre.nfcontrol.controller" })
 public class ProdConfig {
+	
+	@Value("${vibbraneo_mail}")
+	private String vibbraneoMail;
+	
+	@Value("${vibbraneo_password}")
+	private String vibbraneoPassword;
 
 	@Autowired
 	private UserService userService;
@@ -51,11 +61,10 @@ public class ProdConfig {
 		// Users Test
 		try {
 			String name = "Vibbraneo";
-			String mail = "srvibbraneo@gmail.com";
-			String password = "NFControl@1234";
-			User user = new User(name, mail, password, Arrays.asList(roles));
-			userService.save(user);
+			User user = new User(name, vibbraneoMail, vibbraneoPassword, Arrays.asList(roles));
+			userService.save(user);			
 		} catch (ProjectException e) {
+			log.error(e.getMessage(), e);
 		}
 	}
 

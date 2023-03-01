@@ -60,7 +60,6 @@ public class UserController {
 		return ResponseEntity.ok(userService.findByPage(active, page, size, order, direction));
 	}
 	
-    @Secured({Constants.ROLE_ADMIN, Constants.ROLE_CREATE_USER})
     @PostMapping
     public ResponseEntity<?> create(@RequestBody User user){
         userService.save(user);
