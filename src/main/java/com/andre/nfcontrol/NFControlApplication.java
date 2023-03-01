@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-public class BoilerplateApplication {
+public class NFControlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoilerplateApplication.class, args);
+		SpringApplication.run(NFControlApplication.class, args);
 	}
 
 }
