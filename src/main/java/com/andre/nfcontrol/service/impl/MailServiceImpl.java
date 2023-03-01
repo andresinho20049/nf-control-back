@@ -23,9 +23,6 @@ import org.springframework.stereotype.Service;
 import com.andre.nfcontrol.exceptions.ProjectException;
 import com.andre.nfcontrol.service.MailService;
 
-import lombok.extern.log4j.Log4j2;
-
-@Log4j2
 @Service
 public class MailServiceImpl implements MailService {
 
