@@ -1,6 +1,9 @@
 # Controle de NF
 API Desenvolvida para projeto Controle de NF Freelancer, teste 8612.
 
+[preview](https://nf-control-front.vercel.app)
+ - E-mail:  
+
 ## API Rest com autenticação Oauth2 e documentação usando Swagger
 
 **Sobre**:
