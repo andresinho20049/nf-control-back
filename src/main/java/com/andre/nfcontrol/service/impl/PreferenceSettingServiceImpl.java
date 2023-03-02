@@ -47,8 +47,6 @@ public class PreferenceSettingServiceImpl implements PreferenceSettingService {
 	public void save(PreferenceSetting setting) {
 
 		this.validPersist(setting);
-		
-		setting.setUser(SecurityContext.getUserLogged());
 
 		preferenceSettingRepository.save(setting);
 

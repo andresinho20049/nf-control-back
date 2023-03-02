@@ -35,4 +35,28 @@ public class PreferenceSetting implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false, updatable = false, unique = true)
 	private User user;
+	
+
+	public PreferenceSetting() {
+		super();
+	}
+
+	public PreferenceSetting(Double maxLimit, Boolean isSendSms, Boolean isSendMail, User user) {
+		super();
+		this.maxLimit = maxLimit;
+		this.isSendSms = isSendSms;
+		this.isSendMail = isSendMail;
+		this.user = user;
+	}
+
+	public PreferenceSetting(Long id, Double maxLimit, Boolean isSendSms, Boolean isSendMail, User user) {
+		super();
+		this.id = id;
+		this.maxLimit = maxLimit;
+		this.isSendSms = isSendSms;
+		this.isSendMail = isSendMail;
+		this.user = user;
+	}
+	
+	
 }

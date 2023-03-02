@@ -28,6 +28,6 @@ public abstract class BaseModel implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false, updatable = false)
 	private User user;
 }

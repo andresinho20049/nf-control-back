@@ -11,8 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.andre.nfcontrol.exceptions.ProjectException;
+import com.andre.nfcontrol.models.PreferenceSetting;
 import com.andre.nfcontrol.models.User;
 import com.andre.nfcontrol.repository.UserRepository;
+import com.andre.nfcontrol.service.PreferenceSettingService;
 import com.andre.nfcontrol.service.UserService;
 import com.andre.nfcontrol.utils.Pagination;
 
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private PreferenceSettingService preferenceSettingService;
 	
 //	@Autowired
 //	private MailService mailService;
@@ -76,7 +81,11 @@ public class UserServiceImpl implements UserService {
 		user.setActive(true);
 		user.setUpdatePassword(true);
 
-		userRepository.save(user);
+		user = userRepository.save(user);
+		
+		Double maxLimitDefault = (double) 81000.00;
+		
+		preferenceSettingService.save(new PreferenceSetting(maxLimitDefault, false, false, user));
 
 	}
 
