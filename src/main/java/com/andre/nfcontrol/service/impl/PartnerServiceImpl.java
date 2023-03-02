@@ -87,10 +87,14 @@ public class PartnerServiceImpl implements PartnerService {
 	}
 
 	@Override
-	public Page<Partner> findByPage(Integer page, Integer size, String order, String direction) {
+	public Page<Partner> findByPage(String search, Integer page, Integer size, String order, String direction) {
 		PageRequest pageRequest = Pagination.getPageRequest(page, size, order, direction);
 		
 		Long userId = SecurityContext.getUserLogged().getId();
+		
+		if (search != null)
+			return partnerRepository.findByUser_IdAndShortNameIgnoreCaseStartingWithOrCnpjStartingWith(userId, search,
+					search, pageRequest);
 
 		return partnerRepository.findByUser_Id(userId, pageRequest);
 	}

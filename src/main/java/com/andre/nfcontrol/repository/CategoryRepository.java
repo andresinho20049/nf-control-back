@@ -21,4 +21,9 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	List<Category> findByIsArchiveAndUser_Id(Boolean isArchive, Long userId);
 	
 	Page<Category> findByIsArchiveAndUser_Id(Boolean isArchive, Long userId, Pageable pageable);
+	
+	
+	Page<Category> findByNameIgnoreCaseStartingWithAndUser_Id(String search, Long userId, Pageable pageable);
+	
+	Page<Category> findByIsArchiveAndNameIgnoreCaseStartingWithAndUser_Id(Boolean isArchive, String search, Long userId, Pageable pageable);
 }

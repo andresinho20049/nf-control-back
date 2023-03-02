@@ -45,12 +45,13 @@ public class PartnerController {
     
 	@GetMapping("/paginated")
 	public ResponseEntity<?> findByPage(
+			@RequestParam(value = "search", required = false) String search,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "5") Integer size,
 			@RequestParam(value = "order", defaultValue = "id") String order,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		
-		return ResponseEntity.ok(partnerService.findByPage(page, size, order, direction));
+		return ResponseEntity.ok(partnerService.findByPage(search, page, size, order, direction));
 	}
 	
     @PostMapping

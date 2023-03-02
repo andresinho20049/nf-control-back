@@ -99,15 +99,26 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Page<Category> findByPage(Boolean isArchive, Integer page, Integer size, String order, String direction) {
+	public Page<Category> findByPage(String search, Boolean isArchive, Integer page, Integer size, String order,
+			String direction) {
 		PageRequest pageRequest = Pagination.getPageRequest(page, size, order, direction);
 
 		Long userId = SecurityContext.getUserLogged().getId();
-		
-		if(isArchive != null)
+
+		if (isArchive == null && search == null) {
+			return categoryRepository.findByUser_Id(userId, pageRequest);
+
+		} else if (isArchive != null && search == null) {
 			return categoryRepository.findByIsArchiveAndUser_Id(isArchive, userId, pageRequest);
-		
-		return categoryRepository.findByUser_Id(userId, pageRequest);
+
+		} else if (isArchive == null && search != null) {
+			return categoryRepository.findByNameIgnoreCaseStartingWithAndUser_Id(search, userId, pageRequest);
+
+		} else {
+			return categoryRepository.findByIsArchiveAndNameIgnoreCaseStartingWithAndUser_Id(isArchive, search, userId,
+					pageRequest);
+		}
+
 	}
 
 }

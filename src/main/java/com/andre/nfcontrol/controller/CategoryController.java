@@ -47,13 +47,14 @@ public class CategoryController {
     
 	@GetMapping("/paginated")
 	public ResponseEntity<?> findByPage(
+			@RequestParam(value = "search", required = false) String search,
 			@RequestParam(value = "archive", required = false) Boolean isArchive,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "5") Integer size,
 			@RequestParam(value = "order", defaultValue = "id") String order,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		
-		return ResponseEntity.ok(categoryService.findByPage(isArchive, page, size, order, direction));
+		return ResponseEntity.ok(categoryService.findByPage(search, isArchive, page, size, order, direction));
 	}
 	
     @PostMapping

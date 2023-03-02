@@ -17,4 +17,7 @@ public interface PartnerRepository extends JpaRepository<Partner, Long> {
 	
 	Page<Partner> findByUser_Id(Long userId, Pageable pageable);
 	
+	
+	Page<Partner> findByUser_IdAndShortNameIgnoreCaseStartingWithOrCnpjStartingWith(Long userId, String searchName, String searchCnpj, Pageable pageable);
+
 }

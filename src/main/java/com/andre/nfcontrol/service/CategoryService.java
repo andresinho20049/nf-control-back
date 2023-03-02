@@ -20,6 +20,6 @@ public interface CategoryService {
 	
 	Category findById(Long id);
 	
-	Page<Category> findByPage(Boolean isArchive, Integer page, Integer size, String order, String direction);
+	Page<Category> findByPage(String search, Boolean isArchive, Integer page, Integer size, String order, String direction);
 	
 }

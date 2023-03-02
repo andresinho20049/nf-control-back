@@ -18,6 +18,6 @@ public interface PartnerService {
 	
 	Partner findById(Long id);
 	
-	Page<Partner> findByPage(Integer page, Integer size, String order, String direction);
+	Page<Partner> findByPage(String search, Integer page, Integer size, String order, String direction);
 	
 }
