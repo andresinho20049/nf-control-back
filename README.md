@@ -126,6 +126,53 @@ Marque lombok e depois click em finish
 }
 ```
 
+## Mail Service
+Foi desenvolvido a implementação de envio de e-mails utilizando SMTP do Google, porem o google removeu a possibilidade de permitir apps menos seguros. Então no momento o envio de e-mail não esta funcionando.
+
+```Java
+  private JavaMailSender getMailSender() {
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
+		sender.setProtocol("smtp");
+		sender.setHost("smtp.gmail.com");
+		
+		sender.setPort(587);
+		sender.setUsername(username);
+		sender.setPassword(password);
+
+		Properties mailProps = new Properties();
+
+		mailProps.put("mail.smtp.auth", "true");
+		mailProps.put("mail.smtp.starttls.enable", "true");
+		mailProps.put("mail.smtp.starttls.required", "false");
+		mailProps.put("mail.smtp.ssl.enable", "false");
+
+		sender.setJavaMailProperties(mailProps);
+
+		return sender;
+	}
+```
+
+As credenciais utilizadas no portal são carregadas do environment.
+
+## Lançamento de Notas
+Conforme apresentado abaixo as notas são filtradas por ano, podendo validar o lançamento de notas e realizar as estimativas de faturamento anual.
+
+```Java
+  @Override
+	public Page<Invoice> findByPage(Integer year, Integer page, Integer size, String order, String direction) {
+		PageRequest pageRequest = Pagination.getPageRequest(page, size, order, direction);
+		
+		Long userId = SecurityContext.getUserLogged().getId();
+
+		if(year != null)
+			return invoiceRepository.findByYearAndUser(year, userId, pageRequest);
+		
+		return invoiceRepository.findByUser_Id(userId, pageRequest);
+	}
+```
+
+Todos os valores lançados no portal são vinculados ao usuálrio logado, então cada usuário tem permissão de visualizar apenas os proprios lançamentos.
+
 > **Projeto:** NF Control \
 > **Dev:** André Carlos [(andresinho20049)](https://github.com/andresinho20049)       
 <!-- > **Url-Teste:** https://liga-bjj-back-api.up.railway.app/api -->
