@@ -42,11 +42,11 @@ public class Invoice extends BaseModel {
 	private String invoiceDescription;
 	
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "MM-yyyy", locale = "pt-BR", timezone = "Brazil/East")
+	@JsonFormat(pattern = "yyyy-MM", locale = "pt-BR", timezone = "Brazil/East")
 	private Date accrualDate;
 	
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "Brazil/East")
+	@JsonFormat(pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "Brazil/East")
 	private Date dueDate;
 	
 }
